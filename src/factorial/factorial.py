@@ -1,9 +1,18 @@
+#!/usr/bin/python
+# *-------------------------------------------------------------------------*
+# * factorial.py                                                            *
+# * Calcula factorial de número o rango                                     *
+# * TP1 - Ingeniería de Software II                                         *
+# *-------------------------------------------------------------------------*
+
 import sys
 
+# Calcula el factorial de un número
 def factorial(num):
     if num < 0:
         print("No existe factorial de negativos")
         return 0
+
     if num == 0:
         return 1
 
@@ -11,37 +20,41 @@ def factorial(num):
     while num > 1:
         fact *= num
         num -= 1
+
     return fact
 
 
-# ✔ Función para procesar entrada
+# Interpreta la entrada del usuario
 def procesar_entrada(entrada):
 
+    # Detecta rango
     if "-" in entrada:
         partes = entrada.split("-")
 
-        # "-10" → 1 a 10
+        # Caso "-10"
         if partes[0] == "":
             inicio = 1
             fin = int(partes[1])
 
-        # "5-" → 5 a 60
+        # Caso "5-"
         elif partes[1] == "":
             inicio = int(partes[0])
             fin = 60
 
-        # "4-8"
+        # Caso "4-8"
         else:
             inicio = int(partes[0])
             fin = int(partes[1])
+
     else:
+        # Número único
         inicio = int(entrada)
         fin = int(entrada)
 
     return inicio, fin
 
 
-# Entrada
+# Programa principal
 if len(sys.argv) < 2:
     entrada = input("Ingrese número o rango: ")
 else:
@@ -49,11 +62,10 @@ else:
 
 inicio, fin = procesar_entrada(entrada)
 
-# Validación
 if inicio > fin:
     print("Rango inválido")
     sys.exit()
 
-# Mostrar
+# Calcula y muestra resultados
 for i in range(inicio, fin + 1):
     print(f"Factorial {i}! es {factorial(i)}")
