@@ -1,6 +1,4 @@
-#!/usr/bin/python3
-# Python program to display all the prime numbers within an interval
-
+# calcula los primos entre 1 y 500
 lower = 1
 upper = 500
 
