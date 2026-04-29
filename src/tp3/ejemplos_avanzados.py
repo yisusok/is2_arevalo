@@ -294,13 +294,13 @@ def ejecutar_pruebas():
     calc1 = FactorialCalculator()
     calc2 = FactorialCalculator()
     assert calc1 is calc2, "ERROR: Las instancias no son idénticas"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 2: Cálculo de factorial
     print("\n✓ PRUEBA 2: Singleton - Cálculo Correcto")
     assert calc1.calcular(5) == 120, "ERROR: Factorial incorrecto"
     assert calc1.calcular(0) == 1, "ERROR: 0! debe ser 1"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 3: Impuestos
     print("\n✓ PRUEBA 3: Singleton - Cálculo de Impuestos")
@@ -309,7 +309,7 @@ def ejecutar_pruebas():
     assert impuestos['iva'] == 210, "ERROR: IVA incorrecto"
     assert impuestos['iibb'] == 50, "ERROR: IIBB incorrecto"
     assert impuestos['municipal'] == 12, "ERROR: Municipal incorrecto"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 4: Prototype - Clonación
     print("\n✓ PRUEBA 4: Prototype - Clonación Independiente")
@@ -320,13 +320,13 @@ def ejecutar_pruebas():
     doc_copia.modificar(nuevo_titulo="Nuevo Título")
     assert doc_original.titulo == "Título", "ERROR: Original fue modificado"
     assert doc_copia.titulo == "Nuevo Título", "ERROR: Copia no fue modificada"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 5: Prototype - Copia de Copia
     print("\n✓ PRUEBA 5: Prototype - Copia Generada por Copia")
     doc_copia2 = doc_copia.obtener_copia_de_copia()
     assert doc_copia._id != doc_copia2._id, "ERROR: Las copias deben tener IDs diferentes"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 6: Strategy
     print("\n✓ PRUEBA 6: Strategy - Cambio Dinámico de Estrategia")
@@ -334,7 +334,7 @@ def ejecutar_pruebas():
     hamburgesa.set_metodo_entrega(EntregaDelivery())
     resultado = hamburgesa.procesar_entrega()
     assert "delivery" in resultado.lower(), "ERROR: Método no aplicado"
-    print("  Resultado: PASSOU")
+    print("  Resultado: Pasó")
     
     # Prueba 7: Errores esperados
     print("\n✓ PRUEBA 7: Manejo de Errores")
@@ -342,7 +342,7 @@ def ejecutar_pruebas():
         calc1.calcular(-5)
         print("  Resultado: FALLÓ (debe lanzar excepción)")
     except ValueError:
-        print("  Resultado: PASSOU")
+            print("  Resultado: pasó")
     
     print("\n" + "="*70)
     print("TODAS LAS PRUEBAS PASARON CORRECTAMENTE")
