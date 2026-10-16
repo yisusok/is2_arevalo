@@ -1,0 +1,59 @@
+name: CI/CD Pipeline - TP11 Calidad de Software
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  quality-and-tests:
+    name: Lint, Static Analysis, Security & Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r src/tp11/requirements.txt
+
+      - name: Validar formato con Black
+        run: |
+          black --check src/tp11/
+
+      - name: Validar reglas de estilo con Ruff
+        run: |
+          ruff check src/tp11/
+
+      - name: Validar convenciones de docstrings PEP257 (pydocstyle)
+        run: |
+          pydocstyle src/tp11/json2csv.py src/tp11/collatz.py
+
+      - name: Análisis de tipos con MyPy
+        run: |
+          mypy src/tp11/json2csv.py src/tp11/collatz.py
+
+      - name: Análisis de tipos con PyRight
+        run: |
+          pyright src/tp11/json2csv.py src/tp11/collatz.py
+
+      - name: Evaluación de seguridad con Bandit (excluyendo Trufflehog)
+        run: |
+          bandit -r src/tp11/json2csv.py src/tp11/collatz.py
+
+      - name: Ejecución de Tests Unitarios y Cobertura con Pytest (>=85%)
+        run: |
+          pytest -o pythonpath=. src/tp11/test_json2csv.py src/tp11/test_collatz.py -v --cov=src.tp11 --cov-report=term-missing --cov-fail-under=85
+
+      - name: Generar documentación con pdoc
+        run: |
+          pdoc -o doc/api src/tp11/json2csv.py src/tp11/collatz.py
